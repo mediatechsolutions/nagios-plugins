@@ -109,16 +109,13 @@ else
     swapUsedPrc=$((($swapUsed_k*100)/$swapTotal_k))
 fi
 
-message="[MEMORY] Total: $memTotal_m MB - Used: $memUsed_m MB - $memUsedPrc% [SWAP] Total: $swapTotal_m MB - Used: $swapUsed_m MB - $swapUsedPrc% | MTOTAL=$memTotal_b;;;; MUSED=$memUsed_b;;;; MCACHE=$memCache_b;;;; MBUFFER=$memBuffer_b;;;; STOTAL=$swapTotal_b;;;; SUSED=$swapUsed_b;;;;"
+message="[MEMORY] Total: $memTotal_m MB - Used: $memUsed_m MB - $memUsedPrc% [SWAP] Total: $swapTotal_m MB - Used: $swapUsed_m MB - $swapUsedPrc% | TOTAL=$memTotal_b;;;; USED=$memUsed_b;;;; CACHE=$memCache_b;;;; BUFFER=$memBuffer_b;;;; SWAP_TOTAL=$swapTotal_b;;;; SWAP_USED=$swapUsed_b;;;; SWAP_USED_PRC=$swapUsedPrc;$optSW;$optSC;; USED_PRC=$memUsedPrc;$optMW;$optMC;;"
 
-
+echo -e $message
 if [ $memUsedPrc -ge $optMC ] || [ $swapUsedPrc -ge $optSC ]; then
-  echo -e $message
   $(exit 2)
 elif [ $memUsedPrc -ge $optMW ] || [ $swapUsedPrc -ge $optSW ]; then
-  echo -e $message
   $(exit 1)
 else
-  echo -e $message
   $(exit 0)
 fi
